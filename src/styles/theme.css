@@ -1,0 +1,52 @@
+/* Tema minimo per Museo del Cinema 2040 */
+:root{
+  --bg: #0B1020;
+  --surface: #0F1724;
+  --accent: #00FFD1;
+  --accent-2: #7C5CFF;
+  --muted: #AAB4C4;
+  --text: #E6EEF8;
+  --glass: rgba(255,255,255,0.04);
+  --max-w: 1100px;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,var(--bg),#07101a);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{max-width:var(--max-w);margin:0 auto;padding:1.25rem}
+
+header.site-header{
+  position:sticky;top:0;background:transparent;padding:0.75rem 0;backdrop-filter:blur(6px);z-index:40
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-weight:700;letter-spacing:0.6px;color:var(--text)}
+nav a{color:var(--muted);text-decoration:none;margin-left:1rem;padding:0.25rem 0.5rem;border-radius:6px}
+nav a:hover{color:var(--text);background:var(--glass)}
+nav a.active{color:var(--accent);box-shadow:0 0 12px var(--accent)}
+
+.hero{display:flex;flex-direction:column;gap:1rem;padding:3rem 0}
+.hero .title{font-family: Orbitron, Inter, sans-serif;font-size:clamp(1.6rem,3.6vw,3rem);color:var(--text);margin:0}
+.hero .subtitle{color:var(--muted);margin:0;max-width:60ch}
+.cta{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#001019;padding:0.6rem 1rem;border-radius:10px;margin-top:1rem;font-weight:600;text-decoration:none}
+
+main.section{padding:2rem 0}
+.section-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:1rem;border-radius:10px;margin-bottom:1rem}
+
+footer.site-footer{padding:2rem 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+
+/* Responsive */
+@media(min-width:720px){
+  .hero{flex-direction:row;align-items:center;justify-content:space-between}
+  .hero .left{flex:1}
+  .hero .right{max-width:420px}
+}
+
+a:focus{outline:2px dashed var(--accent);outline-offset:3px}
