@@ -6,8 +6,34 @@
   --accent-2: #7C5CFF;
   --muted: #AAB4C4;
   --text: #E6EEF8;
+  --text-h: #E6EEF8; /* heading color for dark theme */
+  --cta-text: #001019; /* text color for CTA (suitable on bright gradients) */
   --glass: rgba(255,255,255,0.04);
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+  --surface-elev: rgba(255,255,255,0.02);
   --max-w: 1100px;
+  --focus: #7C5CFF33;
+}
+
+/* Light theme overrides */
+:root[data-theme="light"]{
+  --bg: #F7FAFF;
+  --surface: #FFFFFF;
+  --accent: #0066FF;
+  --accent-2: #7C5CFF;
+  --muted: #5E6A7A;
+  --text: #061024;
+  --text-h: #061024; /* heading color for light theme */
+  --cta-text: #FFFFFF; /* make CTA readable on colored buttons */
+  --glass: rgba(6,16,36,0.04);
+  --card-bg: linear-gradient(180deg, rgba(6,16,36,0.02), rgba(0,0,0,0));
+  --surface-elev: rgba(6,16,36,0.02);
+  --focus: #0066FF33;
+}
+
+/* Visual improvements: soften gradients and surface contrast */
+body{
+  background: linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 90%, rgba(0,0,0,0) 10%));
 }
 
 *{box-sizing:border-box}
@@ -28,25 +54,75 @@ header.site-header{
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .logo{font-weight:700;letter-spacing:0.6px;color:var(--text)}
-nav a{color:var(--muted);text-decoration:none;margin-left:1rem;padding:0.25rem 0.5rem;border-radius:6px}
+nav a{color:var(--muted);text-decoration:none;margin-left:1rem;padding:0.25rem 0.5rem;border-radius:6px;display:inline-flex;align-items:center;gap:0.5rem}
 nav a:hover{color:var(--text);background:var(--glass)}
 nav a.active{color:var(--accent);box-shadow:0 0 12px var(--accent)}
 
-.hero{display:flex;flex-direction:column;gap:1rem;padding:3rem 0}
+/* Icone dentro nav */
+nav a svg{width:18px;height:18px;opacity:0.9;filter:none}
+
+.theme-toggle{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:0.35rem;border-radius:8px;display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle:focus{outline:3px solid var(--focus);outline-offset:2px}
+
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+.hero{display:flex;flex-direction:column;gap:1rem;padding:2.25rem 0}
 .hero .title{font-family: Orbitron, Inter, sans-serif;font-size:clamp(1.6rem,3.6vw,3rem);color:var(--text);margin:0}
 .hero .subtitle{color:var(--muted);margin:0;max-width:60ch}
-.cta{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#001019;padding:0.6rem 1rem;border-radius:10px;margin-top:1rem;font-weight:600;text-decoration:none}
+/* CTA text color uses variable to ensure contrast in both themes */
+.cta{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:var(--cta-text);padding:0.6rem 1rem;border-radius:10px;margin-top:1rem;font-weight:600;text-decoration:none}
 
 main.section{padding:2rem 0}
-.section-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:1rem;border-radius:10px;margin-bottom:1rem}
+/* Make surface a bit lighter on dark theme for readability */
+.section-card{background:var(--surface);box-shadow:0 6px 18px rgba(2,6,23,0.18);padding:1rem;border-radius:12px;margin-bottom:1rem}
 
-footer.site-footer{padding:2rem 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+/* Big toggle row */
+.big-toggle-row{display:flex;gap:1rem;align-items:stretch;justify-content:space-between}
+.big-toggle{flex:1 1 0;display:flex;flex-direction:column;text-decoration:none;color:var(--text);background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 90%, transparent));border-radius:18px;padding:0;overflow:hidden;min-width:180px;max-width:360px;transition:transform .28s ease, box-shadow .28s ease}
+.big-toggle:not(:last-child){/* keep some breathing room */}
+.big-toggle:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(2,6,23,0.12)}
+.big-toggle:focus{outline:3px solid var(--focus);outline-offset:3px}
+.big-toggle-media{height:260px;position:relative;background:linear-gradient(180deg,#f3f6fb,#e6eef7);display:block;border-radius:12px 12px 0 0;overflow:hidden}
+.big-toggle-media img{width:100%;height:100%;object-fit:cover;display:block}
+.big-toggle-placeholder{width:100%;height:100%;background:linear-gradient(135deg,rgba(0,0,0,0.06),rgba(255,255,255,0.04))}
+/* overlay to ensure readable text on image */
+.big-toggle::after{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none}
+.big-toggle-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%, rgba(0,0,0,0.12));}
+.big-toggle{position:relative}
 
-/* Responsive */
-@media(min-width:720px){
-  .hero{flex-direction:row;align-items:center;justify-content:space-between}
-  .hero .left{flex:1}
-  .hero .right{max-width:420px}
+/* make titles pop */
+.big-toggle-content h3{font-size:1.2rem;letter-spacing:0.2px}
+.big-toggle-content{padding:0.875rem 1rem;background:linear-gradient(180deg,transparent,var(--surface-elev));display:flex;flex-direction:column;gap:0.25rem}
+.big-toggle-content h3{margin:0;font-size:1.1rem;color:var(--text-h)}
+.big-toggle-content .muted{color:var(--muted);margin:0;font-size:0.95rem}
+
+/* Slightly larger images on wide screens */
+@media(min-width:1100px){
+  .big-toggle-media{height:320px}
 }
 
+/* Ensure big toggles don't take whole width on small screens */
+@media(max-width:920px){
+  .big-toggle-row{flex-direction:column}
+  .big-toggle{max-width:100%}
+}
+
+/* Maintain spacing for home layout */
+.big-toggle-row{margin-top:1rem;margin-bottom:1rem}
+
+/* Small visual polish for hero and cards */
+.hero .right{box-shadow:0 10px 30px rgba(2,6,23,0.12);border-radius:10px;padding:1rem}
+
+/* Make section-card lighter on light theme */
+:root[data-theme="light"] .section-card{box-shadow:0 6px 22px rgba(2,6,23,0.06);border:1px solid rgba(6,16,36,0.04)}
+
+/* Ensure text contrast for inline styles */
+[style*="color:var(--muted)"]{color:var(--muted) !important}
+
 a:focus{outline:2px dashed var(--accent);outline-offset:3px}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important}
+}

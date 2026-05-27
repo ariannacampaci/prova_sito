@@ -1,7 +1,9 @@
+import Icon from '../components/Icon'
+
 export default function DiPiu(){
   return (
     <div>
-      <h1>Di più — Collezioni e Tecnologie</h1>
+      <h1><Icon name="github-icon" /> Di più — Collezioni e Tecnologie</h1>
       <div className="section-card">
         <p>
           Le nostre collezioni combinano pellicole restaurate con layer di dati
@@ -9,7 +11,7 @@ export default function DiPiu(){
           proiettano memorie contestuali. Visite guidate con agenti curatoriali
           virtuali sono disponibili su prenotazione.
         </p>
-        <h4>Sezioni</h4>
+        <h4><Icon name="documentation-icon" /> Sezioni</h4>
         <ul>
           <li>Mostre permanenti</li>
           <li>Laboratori di restauro</li>

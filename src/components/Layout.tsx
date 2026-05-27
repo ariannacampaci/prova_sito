@@ -1,4 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
+import ThemeToggle from './ThemeToggle'
+import Icon from './Icon'
 
 export default function Layout(){
   return (
@@ -7,11 +9,15 @@ export default function Layout(){
         <div className="container header-inner">
           <div className="logo">Museo del Cinema — 2040</div>
           <nav>
-            <NavLink to="/" end className={({isActive})=>isActive? 'active':''}>Home</NavLink>
-            <NavLink to="/di-piu" className={({isActive})=>isActive? 'active':''}>Di più</NavLink>
-            <NavLink to="/social" className={({isActive})=>isActive? 'active':''}>Social</NavLink>
-            <NavLink to="/idee-future" className={({isActive})=>isActive? 'active':''}>Idee Future</NavLink>
+            <NavLink to="/" end className={({isActive})=>isActive? 'active':''}><Icon name="documentation-icon" /> Home</NavLink>
+            <NavLink to="/di-piu" className={({isActive})=>isActive? 'active':''}><Icon name="github-icon" /> Di più</NavLink>
+            <NavLink to="/social" className={({isActive})=>isActive? 'active':''}><Icon name="social-icon" /> Social</NavLink>
+            <NavLink to="/idee-future" className={({isActive})=>isActive? 'active':''}><Icon name="documentation-icon" /> Idee Future</NavLink>
           </nav>
+
+          <div style={{display:'flex',alignItems:'center',gap:'0.75rem'}}>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
